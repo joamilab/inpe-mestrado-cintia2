@@ -74,7 +74,8 @@ from datavisualization import plotScatter
 #Runs specified module (Ia, Ib, Ic or II)
 def runModule(module, pathFile):
    print('Running module ' + module + '...\n')
-   
+
+   os.chdir(pathFile + '/M' + module)
    cmd = pathFile + '/M' + module + '/Modulo' + module
    os.popen(cmd).read()
    
