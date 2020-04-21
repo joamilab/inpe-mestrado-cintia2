@@ -1,0 +1,38 @@
+*************Operating instructions of CIntIa 2.0**************
+Author: Francisca Joamila Brito DO NASCIMENTO
+Contact: francisca.nascimento@inpe.br / joamila.brito@gmail.com
+
+##########################################################
+CIntIa 2.0 depends on Python3 and the following packages:
+
+* csv
+* datetime
+* matplotlib.pyplot
+* numpy
+* os
+* pandas
+* scipy.interpolate
+* scipy.signal
+* sklearn.manifold
+*sys
+
+###################################################
+How to prepare the inputs:
+
+* File with redshift values must have a .csv extension and have at least two columns:
+  'Name Disc.' -> supernova name;
+  'Redshift'   -> redshift value.
+* The spectra must be within the same folder and have a .csv extension. Each file must have two columns:
+  First column: wavelength values;
+  Second columns: flux values.
+
+###################################################
+How to run the program from the command line:
+
+cd <path-where-is-the-file>\cintia2
+python cintia2.py
+
+###################################################
+Results:
+
+The results will be printed in the console and saved in the folder ...\cintia2\Logs.
