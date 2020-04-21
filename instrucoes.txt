@@ -1,0 +1,39 @@
+*************Instruções de uso da CINTIA 2.1**************
+Autora: Joamila Brito
+Contato: joamila.brito@gmail.com
+
+##########################################################
+A CINTIA 2 depende do Python3 e dos seguintes pacotes:
+
+* csv
+* datetime
+* matplotlib.pyplot
+* numpy
+* os
+* pandas
+* scipy.interpolate
+* scipy.signal
+* sklearn.manifold
+* sys
+
+###################################################
+Como preparar as entradas:
+
+* Arquivo com valores de redshift deve ter a extensão .csv e possuir pelo menos duas colunas:
+  'Name Disc.' -> nome da supernova;
+  'Redshift'   -> valor do redshift.
+* Os espectros devem estar dentro de uma mesma pasta e possuirem extensão .csv. Cada arquivo deve ter duas colunas:
+  Primeira coluna: valores de comprimento de onda;
+  Segunda coluna: valores de fluxo.
+
+###################################################
+Como executar o programa na linha de comando:
+
+cd <caminho onde a pasta está salva>/cintia2
+python cintia2.py <caminho-arquivo-redshift> <caminho-pasta-de-espectros>
+
+###################################################
+Resultados:
+
+Os resultados serão impressos no console e salvos na pasta /cintia2/Logs
+Os gráficos serão exibidos e salvos na pasta /cintia2/Images
