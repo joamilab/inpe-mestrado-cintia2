@@ -62,10 +62,8 @@ Thanks to Coordenação de Aperfeiçoamento de Pessoal de Nível Superior -
 Brasil (CAPES) for the financial support, Financing Code 001.   
 
 """
-import os
+import csv, datetime, os
 import pandas as pd
-import csv
-import datetime
 
 from preclass_types import pipeline
 from datavisualization import plotScatter
@@ -75,11 +73,17 @@ from datavisualization import plotScatter
 def runModule(module, pathFile):
    print('Running module ' + module + '...\n')
 
-   os.chdir(pathFile + '/M' + module)
-   cmd = pathFile + '/M' + module + '/Modulo' + module
+   os.chdir(os.path.join(pathFile, 'M' + module))
+   cmd = os.path.join(pathFile, 'M' + module + '/Modulo' + module)
    os.popen(cmd).read()
    
-   labeled = pd.read_csv(pathFile + '/M' + module + '/Classificacao_ModuloEntradaRNA_' + module + '_.csv', delimiter=';')
+   pathLabeled = os.path.join(pathFile, 'M' + module + '/Classificacao_ModuloEntradaRNA_' + module + '_.csv')
+   
+   try:
+       labeled = pd.read_csv(pathLabeled, delimiter=';')
+   except:
+       print("\nSorry, an error happened. I cannot classify the supernovae. :(\n")
+       return
    
    types = []
    for index, row in labeled.iterrows():
@@ -93,9 +97,9 @@ def runModule(module, pathFile):
 #Salva relatório de classificação
 #Saves a log about the classification
 def saveLog(patterns, pathFile):
-    date = str(datetime.datetime.now())
+    date = datetime.datetime.now().strftime("%d-%m-%Y_%H-%M-%S")
     
-    fileOutput = pathFile + '/Logs/log_' + date + '.csv'
+    fileOutput = os.path.join(pathFile, 'Logs/log_' + date + '.csv')
 
     with open(fileOutput, 'w') as csvfile:
         wr = csv.writer(csvfile, delimiter=';', quoting=csv.QUOTE_MINIMAL)
@@ -139,7 +143,7 @@ def runClassifier(patterns, pathFile, isomap_data):
                               classIa[position], classIb[position], classIc[position],
                               classII[position]])
         
-    fileOutput = pathFile + '/Logs/Votacao.csv'
+    fileOutput = os.path.join(pathFile, 'Logs/Votacao.csv')
     with open(fileOutput, 'w') as csvfile:
         wr = csv.writer(csvfile, delimiter=';', quoting=csv.QUOTE_MINIMAL)
         wr.writerow(['Padrao', 'Supernova', 'Espectro', 'Class Ia', 'Class Ib', 'Class Ic', 'Class II'])

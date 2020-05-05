@@ -2,17 +2,15 @@
 # -*- coding: utf-8 -*-
 """
 Created on Thu Oct  4 10:53:18 2018
-Last Modified: 19/04/2020
+Last Modified: 04/05/2020
 @author: joamila
 """
 
 import matplotlib.pyplot as plt
-import datetime
-import os
+import datetime, os
 import pandas as pd
 from sklearn.manifold import Isomap
 
-from extractfeatures import getPathFile
 
 def plotSpectra(spectra):    
     plt.figure(1, figsize=(10,8))
@@ -25,10 +23,10 @@ def plotSpectra(spectra):
     plt.ylabel('flux')
     plt.title('Supernovae Spectra (after preprocessing)')
     
-    pathFile = getPathFile()
-    name_figure = "Spectra_" + str(datetime.datetime.now()) + ".png"
+    pathFile = os.path.dirname(os.path.dirname(os.getcwd()))
+    name_figure = "Spectra_" + datetime.datetime.now().strftime("%d-%m-%Y_%H-%M-%S") + ".png"
     
-    plt.savefig(pathFile + '/Images/' + name_figure)
+    plt.savefig(os.path.join(pathFile, 'Images/' + name_figure))
     
     plt.show()
     
@@ -88,11 +86,11 @@ def plotScatter(xs, ys, rna, patterns):
     plt.title('RNA ' + rna + ': scatter plot of spectra after classification.') 
     plt.xlabel('first component isomap')
     plt.ylabel('second component isomap')
-
-    pathFile = getPathFile()
-    name_figure = "Scatter_" + rna + "_" + str(datetime.datetime.now()) + ".png" 
     
-    plt.savefig(pathFile + '/Images/' + name_figure)
+    pathFile = os.path.dirname(os.getcwd())
+    name_figure = "Scatter_" + rna + "_" + datetime.datetime.now().strftime("%d-%m-%Y_%H-%M-%S") + ".png"
+    
+    plt.savefig(os.path.join(pathFile, 'Images/' + name_figure))
     
     if rna == 'II':
         plt.show()

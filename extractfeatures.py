@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 """
 Created on Wed Oct  3 11:12:00 2018
-Last Modified: 19/04/2020
+Last Modified: 04/05/2020
 @author: joamila
 """
 
@@ -105,32 +105,14 @@ def extractInputs(spectra):
         
     return spectra
 
-
-#Descobre o caminho do arquivo
-#Get file's path
-def getPathFile():
-    pathFileAux = os.path.abspath(__file__)
-    pathFolders = pathFileAux.split('/')
-    
-    amountFolders = len(pathFolders)
-    count = 1
-    pathFile = '/'
-    
-    while count < amountFolders-2:
-        pathFile = pathFile + pathFolders[count] + '/'
-        count = count + 1
-    pathFile = pathFile + pathFolders[amountFolders-2]
-    
-    return pathFile
-
              
 #Gera arquivo com os padrões para a classificação
 #Generates a file with the patterns for classification 
 def generateFileTest(rna, spectra):
-    pathFile = getPathFile()
+    pathFile = os.path.dirname(os.path.dirname(os.getcwd()))
     
-    rootFolder = pathFile + '/M' + rna
-    fileOut = rootFolder + '/EntradaRNA_' + rna + '_Teste.csv'
+    rootFolder = os.path.join(pathFile, 'M' + rna)
+    fileOut = os.path.join(rootFolder, 'EntradaRNA_' + rna + '_Teste.csv')
     
     listOfParams = []
     patterns = []
